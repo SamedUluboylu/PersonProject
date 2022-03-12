@@ -7,6 +7,6 @@ namespace PersonProject.DataAccess
 {
     public interface IPersonDal:IEntityRepository<Person>
     {
-        List<PersonDetailDto> GetProductDetails();
+        List<PersonDetailDto> GetPersonDetails();
     }
 }

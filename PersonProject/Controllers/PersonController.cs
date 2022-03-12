@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PersonProject.Business;
 using PersonProject.DataAccess;
+using PersonProject.DTOs;
 using PersonProject.Entities;
 
 namespace PersonProject.Controllers
@@ -67,4 +68,6 @@ namespace PersonProject.Controllers
             return BadRequest(result);
         }
     }
+
 }
+
