@@ -13,7 +13,7 @@ namespace PersonProject.Business.Concrete
 
         public ContactManager(IPersonService personService, IContactDal contactDal)
         {
-            _contactDal = _contactDal;
+            _contactDal = contactDal;
             _personService = personService;
         }
 

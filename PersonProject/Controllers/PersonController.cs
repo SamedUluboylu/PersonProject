@@ -70,7 +70,7 @@ namespace PersonProject.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getall")]
+        [HttpGet("getallcontact")]
         public IActionResult GetAllContact()
         {
             var result = _contactService.GetAllContact();
@@ -81,7 +81,7 @@ namespace PersonProject.Controllers
             return BadRequest(result);
 
         }
-        [HttpGet("getbyid")]
+        [HttpGet("getbylocation")]
         public IActionResult GetByLocation(string location)
         {
             var result = _contactService.GetByLocation(location);
@@ -91,7 +91,7 @@ namespace PersonProject.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("add")]
+        [HttpPost("addcontact")]
         public IActionResult Add(Contact contact)
         {
             var result = _contactService.Add(contact);
@@ -101,7 +101,7 @@ namespace PersonProject.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPut("update")]
+        [HttpPut("updatecontact")]
         public IActionResult Update(Contact contact)
         {
             var result = _contactService.Update(contact);
@@ -111,7 +111,7 @@ namespace PersonProject.Controllers
             }
             return BadRequest(result);
         }
-        [HttpDelete("delete")]
+        [HttpDelete("deletecontact")]
         public IActionResult Delete(Contact contact)
         {
             var result = _contactService.Delete(contact);
