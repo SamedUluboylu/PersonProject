@@ -12,10 +12,12 @@ namespace PersonProject.Controllers
     public class PersonController : ControllerBase
     {
         IPersonService _personService;
+        IContactService _contactService;
 
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, IContactService contactService)
         {
             _personService = personService;
+            _contactService = contactService;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
@@ -26,6 +28,7 @@ namespace PersonProject.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+
         }
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
@@ -67,7 +70,59 @@ namespace PersonProject.Controllers
             }
             return BadRequest(result);
         }
-    }
+        [HttpGet("getall")]
+        public IActionResult GetAllContact()
+        {
+            var result = _contactService.GetAllContact();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
 
+        }
+        [HttpGet("getbyid")]
+        public IActionResult GetByLocation(string location)
+        {
+            var result = _contactService.GetByLocation(location);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("add")]
+        public IActionResult Add(Contact contact)
+        {
+            var result = _contactService.Add(contact);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPut("update")]
+        public IActionResult Update(Contact contact)
+        {
+            var result = _contactService.Update(contact);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpDelete("delete")]
+        public IActionResult Delete(Contact contact)
+        {
+            var result = _contactService.Delete(contact);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+    }
 }
+
+
 
