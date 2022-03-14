@@ -1,8 +1,10 @@
 ﻿using PersonProject.Core.Utilities;
 using PersonProject.DataAccess;
+using PersonProject.DTOs;
 using PersonProject.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PersonProject.Business.Concrete
 {
@@ -17,41 +19,71 @@ namespace PersonProject.Business.Concrete
             _personService = personService;
         }
 
-        public IResult Add(Contact contact)
+        public IResult Add(List<CreateContactModel> contact)
         {
             IResult result = null;
-            if (result!=null)
+            if (!contact.Any())
             {
                 return result;
             }
-            _contactDal.Add(contact);
+            List<Contact>contactlist=new List<Contact>();
+            foreach (var item in contact)
+            {
+                contactlist.Add(new Contact()
+                {
+                    EmailAddress=item.EmailAddress,
+                    Information=item.Information,
+                    Location=item.Location,
+                    PersonId=item.PersonId, 
+                    PhoneNumber=item.PhoneNumber
+
+                });
+            }
+            _contactDal.AddRange(contactlist);
             return new SuccessResult();
         }
 
-        public IResult Delete(Contact contact)
+        public IResult Delete(int id)
         {
-            throw new System.NotImplementedException();
+            IResult result = null;
+            if (id==default(int))
+            {
+                return result;
+            }
+            Contact contact = _contactDal.Get(i => i.Id == id);
+            if (contact==null)
+            {
+                return result;
+            }
+            _contactDal.Delete(contact);
+            return new SuccessResult();
         }
 
         public IDataResult<List<Contact>> GetAllContact()
         {
-            throw new System.NotImplementedException();
+            return new SuccessDataResult<List<Contact>>(_contactDal.GetAll());
         }
 
-        public IDataResult<Contact> GetByLocation(string location)
+        public IDataResult<List<Contact>> Get(string location)
         {
-            throw new System.NotImplementedException();
+            var result = _contactDal.Get(p=>p.Location==location);
+            if (result==null)
+            {
+                return result;
+            }
+            return new SuccessDataResult();
         }
 
         public IResult Update(Contact contact)
         {
-            var result=_contactDal.GetAll(p=>p.ContactId==contact.ContactId).Count;
-            if (result >= 10)
+            IResult result = null;
+            var response=_contactDal.Get(p=>p.Id==contact.Id);
+            if (response==null)
             {
-                return new ErrorResult();
+                return result;
             }
             _contactDal.Update(contact);
-            throw new NotImplementedException();
+            return new SuccessResult();
         }
     }
 }

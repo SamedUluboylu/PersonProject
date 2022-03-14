@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonProject.Business;
-using PersonProject.DataAccess;
-using PersonProject.DTOs;
 using PersonProject.Entities;
 using System.Collections.Generic;
 
@@ -10,48 +8,52 @@ namespace PersonProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class ContactController : ControllerBase
     {
-        IPersonService _personService;
+        IContactService _contactService;
 
-        public PersonController(IPersonService personService)
+        public ContactController(IContactService contactService)
         {
-            _personService = personService;
+            _contactService = contactService;
+        }
+
+        [HttpPost("Add")]
+        public IActionResult Add(List<CreateContactModel> contact)
+        {
+
+            var result = _contactService.Add(contact);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        public IActionResult GetAllContact()
         {
-            var result = _personService.GetAll();
+            var result = _contactService.GetAllContact();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }
+        [HttpGet("GetByLocation")]
+        public IActionResult GetByLocation(string location)
+        {
+            var result = _contactService.GetByLocation(location);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("GetById")]
-        public IActionResult GetById(int id)
-        {
-            var result = _personService.GetById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpPost("Add")]
-        public IActionResult Add(Person person)
-        {
-            var result = _personService.Add(person);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+
         [HttpPut("Update")]
-        public IActionResult Update(Person person)
+        public IActionResult Update(Contact contact)
         {
-            var result = _personService.Update(person);
+            var result = _contactService.Update(contact);
             if (result.Success)
             {
                 return Ok(result);
@@ -59,9 +61,9 @@ namespace PersonProject.Controllers
             return BadRequest(result);
         }
         [HttpDelete("Delete")]
-        public IActionResult Delete(Person person)
+        public IActionResult Delete(int id)
         {
-            var result = _personService.Delete(person);
+            var result = _contactService.Delete(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -70,6 +72,3 @@ namespace PersonProject.Controllers
         }
     }
 }
-
-
-

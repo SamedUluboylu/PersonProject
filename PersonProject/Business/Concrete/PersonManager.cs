@@ -30,7 +30,7 @@ namespace PersonProject.Business.Concrete
         }
         public IResult Delete(Person person)
         {
-            var result = _personDal.GetAll(p=>p.PersonId== person.PersonId);
+            var result = _personDal.GetAll(p=>p.Id== person.Id);
             if (result!=null)
             {
                 return new ErrorResult();
@@ -46,9 +46,9 @@ namespace PersonProject.Business.Concrete
             }
             return new SuccessDataResult<List<Person>>(_personDal.GetAll());
         }
-          public IDataResult<List<Person>> GetById(int personId)
+          public IDataResult<List<Person>> GetById(int Id)
         {
-            return new SuccessDataResult<List<Person>>(_personDal.GetAll(p=>p.PersonId == personId));
+            return new SuccessDataResult<List<Person>>(_personDal.GetAll(p=>p.Id ==Id));
         }
 
         public IDataResult<List<PersonDetailDto>> GetPersonDetails()
@@ -58,13 +58,13 @@ namespace PersonProject.Business.Concrete
 
         public IResult Update(Person person)
         {
-            var result = _personDal.GetAll(p => p.ContactId == person.ContactId).Count;
+            var result = _personDal.GetAll(p => p.Id == person.Id).Count;
             if (result>=10)
             {
                 return new ErrorResult();
             }
             _personDal.Update(person);
-            throw new NotImplementedException();
+            return new SuccessResult();
         }
     }
 }

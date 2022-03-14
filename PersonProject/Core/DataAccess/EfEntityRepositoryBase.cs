@@ -21,7 +21,20 @@ namespace PersonProject.Core.DataAccess
                     context.SaveChanges();
                 }
             }
-            public void Delete(TEntity entity)
+        public void AddRange(List<TEntity> entities)
+        {
+            using (TContext context = new TContext())
+            {
+                foreach (TEntity entity in entities)
+                {
+                    var addedEntity = context.Entry(entity);
+                    addedEntity.State = EntityState.Added;
+                    context.SaveChanges();
+                }
+
+            }
+        }
+        public void Delete(TEntity entity)
             {
                 using (TContext context = new TContext())
                 {

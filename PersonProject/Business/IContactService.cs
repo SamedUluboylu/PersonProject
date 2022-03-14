@@ -7,9 +7,9 @@ namespace PersonProject.Business
     public interface IContactService
     {
         IDataResult<List<Contact>> GetAllContact();
-        IDataResult<Contact> GetByLocation(string location);
-        IResult Add(Contact contact);
+        IDataResult<List<Contact>> Get(string location);
+        IResult Add(List<CreateContactModel> contact);
         IResult Update(Contact contact);
-        IResult Delete(Contact contact);
+        IResult Delete(int id);
     }
 }

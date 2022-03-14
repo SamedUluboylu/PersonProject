@@ -15,9 +15,7 @@ namespace PersonProject.DataAccess
         {
             _persons = new List<Person>
             { 
-                new Person {PersonId=1,ContactId=1,Name="Samed",LastName="Uluboylu",CompanyName="CompanyName"},
-                
-               
+                new Person {Id=1,Name="Samed",LastName="Uluboylu",CompanyName="CompanyName"},                       
             };
         }
         public void Add(Person person)
@@ -25,9 +23,14 @@ namespace PersonProject.DataAccess
            _persons.Add(person);
         }
 
+        public void AddRange(List<Person> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Person person)
         {
-            Person productToDelete = _persons.SingleOrDefault(p => p.ContactId == person.ContactId);
+            Person productToDelete = _persons.SingleOrDefault(p => p.Id == person.Id);
 
             _persons.Remove(productToDelete);
         }
@@ -46,12 +49,9 @@ namespace PersonProject.DataAccess
         {
             throw new NotImplementedException();
         }
-
         public void Update(Person person)
         {
-            Person personToUpdate = _persons.SingleOrDefault(p => p.PersonId == person.PersonId);
-            personToUpdate.PersonId = person.PersonId;
-            personToUpdate.ContactId = person.ContactId;
+            Person personToUpdate = _persons.SingleOrDefault(p => p.Id == person.Id);
             personToUpdate.Name = person.Name;
             personToUpdate.LastName = person.LastName;
             personToUpdate.CompanyName= person.CompanyName;
