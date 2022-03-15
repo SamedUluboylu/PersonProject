@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace PersonProject.DataAccess
 {
-    public class InMemoryPersonDal : IPersonDal
+    public class InMemoryPersonDal :IPersonDal
     {
         List<Person> _persons;
 
@@ -45,10 +45,6 @@ namespace PersonProject.DataAccess
             return _persons;
         }
 
-        public List<PersonDetailDto> GetPersonDetails()
-        {
-            throw new NotImplementedException();
-        }
         public void Update(Person person)
         {
             Person personToUpdate = _persons.SingleOrDefault(p => p.Id == person.Id);

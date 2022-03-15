@@ -42,7 +42,6 @@ namespace PersonProject.Business.Concrete
             _contactDal.AddRange(contactlist);
             return new SuccessResult();
         }
-
         public IResult Delete(int id)
         {
             IResult result = null;
@@ -63,19 +62,9 @@ namespace PersonProject.Business.Concrete
         {
             return new SuccessDataResult<List<Contact>>(_contactDal.GetAll());
         }
-
-        //public IDataResult<List<Contact>> GetLocation(string location)
-        //{
-        //    return new SuccessDataResult<List<Contact>>(_contactDal.Get(p => p.Location==location));
-        //}
-        public IDataResult<List<ContactDetailDto>> GetContactDetails()
+        public IDataResult<List<ContactDetailDto>> GetContactDetails(string location)
         {
             return new SuccessDataResult<List<ContactDetailDto>>(_contactDal.GetContactDetails());
-        }
-
-        public IDataResult<List<Contact>> GetLocation(string location)
-        {
-            throw new NotImplementedException();
         }
 
         public IResult Update(Contact contact)

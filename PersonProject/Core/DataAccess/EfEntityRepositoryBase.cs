@@ -59,13 +59,6 @@ namespace PersonProject.Core.DataAccess
                         : context.Set<TEntity>().Where(filter).ToList();
                 }
             }
-        public TEntity GetLocation(Expression<Func<TEntity, bool>> filter)
-        {
-            using (TContext context = new TContext())
-            {
-                return context.Set<TEntity>().SingleOrDefault(filter);
-            }
-        }
         public void Update(TEntity entity)
             {
                 using (TContext context = new TContext())

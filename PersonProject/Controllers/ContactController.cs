@@ -40,9 +40,9 @@ namespace PersonProject.Controllers
 
         }
         [HttpGet("GetLocation")]
-        public IActionResult GetLocation(string location)
+        public IActionResult GetContactDetails(string location)
         {
-            var result = _contactService.GetLocation(location);
+            var result = _contactService.GetContactDetails(location);
             if (result.Success)
             {
                 return Ok(result);
