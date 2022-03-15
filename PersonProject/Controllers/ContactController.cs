@@ -39,10 +39,10 @@ namespace PersonProject.Controllers
             return BadRequest(result);
 
         }
-        [HttpGet("GetByLocation")]
-        public IActionResult GetByLocation(string location)
+        [HttpGet("GetLocation")]
+        public IActionResult GetLocation(string location)
         {
-            var result = _contactService.GetByLocation(location);
+            var result = _contactService.GetLocation(location);
             if (result.Success)
             {
                 return Ok(result);

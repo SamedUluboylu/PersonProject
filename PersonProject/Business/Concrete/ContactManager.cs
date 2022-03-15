@@ -64,14 +64,18 @@ namespace PersonProject.Business.Concrete
             return new SuccessDataResult<List<Contact>>(_contactDal.GetAll());
         }
 
-        public IDataResult<List<Contact>> Get(string location)
+        //public IDataResult<List<Contact>> GetLocation(string location)
+        //{
+        //    return new SuccessDataResult<List<Contact>>(_contactDal.Get(p => p.Location==location));
+        //}
+        public IDataResult<List<ContactDetailDto>> GetContactDetails()
         {
-            var result = _contactDal.Get(p=>p.Location==location);
-            if (result==null)
-            {
-                return result;
-            }
-            return new SuccessDataResult();
+            return new SuccessDataResult<List<ContactDetailDto>>(_contactDal.GetContactDetails());
+        }
+
+        public IDataResult<List<Contact>> GetLocation(string location)
+        {
+            throw new NotImplementedException();
         }
 
         public IResult Update(Contact contact)
