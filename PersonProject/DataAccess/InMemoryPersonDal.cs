@@ -45,6 +45,12 @@ namespace PersonProject.DataAccess
             return _persons;
         }
 
+        public List<PersonDetailDto> GetPersonDetails()
+        {
+            throw new NotImplementedException();
+
+        }
+
         public void Update(Person person)
         {
             Person personToUpdate = _persons.SingleOrDefault(p => p.Id == person.Id);
